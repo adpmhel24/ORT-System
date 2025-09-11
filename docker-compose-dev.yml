@@ -1,0 +1,39 @@
+
+services:
+
+  ort_ts_api:
+    # platform: linux/amd64
+    container_name: ort_ts_api
+    build: ./BE
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - APP_NAME=ort_ts_api
+      - TZ=Asia/Manila
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - ./BE:/code
+    expose:
+      - 8000
+    env_file: "./dev/.env"
+    depends_on:
+      - database
+    ports:
+      - 8082:8000
+    restart: always
+
+  database:
+    image: postgres:alpine
+    restart: always
+    container_name: ort_ts_db
+    env_file: "./dev/.env"
+    ports:
+      - 5436:5432 # Remove this on production
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_HOST_AUTH_METHOD= "trust"
+
+

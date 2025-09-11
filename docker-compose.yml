@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  ort_api_server:
+    container_name: ort_api_server
+    build: ./BE
+    command: uvicorn app.main:app --host 0.0.0.0 --port 82
+    environment:
+      - APP_NAME=jpsc_test_api
+      - TZ=Asia/Manila
+      - DEBIAN_FRONTEND=noninteractive
+    expose:
+      - 82
+    env_file: ".env"
+    ports:
+      - 82:82
+    restart: always
+
+
+  nginx:
+    build: ./web
+    container_name: web
+    restart: always
+    environment:
+      - TZ=Asia/Manila
+    ports:
+      - "81:80"
+
+  database:
+    image: postgres:alpine
+    restart: always
+    container_name: psql_prod_db
+    volumes:
+      - ./local_pgdata:/var/lib/postgresql/data
+    env_file: ".env"
+    ports:
+      - 5454:5432 # Remove this on production
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_HOST_AUTH_METHOD= "trust"
+      - USER_ID=1000
+      - GROUP_ID=1000
+
+
+
+      
+

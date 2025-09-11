@@ -1,0 +1,24 @@
+Please create a full api for Job Order (Model, Schema, CRUD, endpoint)
+
+JobOrder Model:
+    - id
+    - bpId
+    - created_at
+    - created_by
+    - jobDate
+    - remarks
+    - jobDescription
+    - status(Accepted, Canceled, Ongoing, Done)
+    - pickupAddress
+    - deliveryAddress
+    - pickupLat
+    - pickupLonge
+    - deliveryLat
+    - deliveryLong
+
+JobOrderLog Model:
+    - jobOrderId
+    - notes
+    - created_at
+    - created_by
+
