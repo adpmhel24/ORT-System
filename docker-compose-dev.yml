@@ -1,4 +1,3 @@
-
 services:
 
   ort_ts_api:
@@ -35,5 +34,6 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_HOST_AUTH_METHOD= "trust"
+
 
 

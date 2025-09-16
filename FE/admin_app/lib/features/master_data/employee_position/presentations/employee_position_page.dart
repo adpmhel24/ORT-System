@@ -1,6 +1,3 @@
-import 'package:admin_app/features/master_data/business_partner/data/models/bp_model.dart';
-import 'package:admin_app/features/master_data/business_partner/presentations/components/bp_form.dart';
-import 'package:admin_app/features/master_data/business_partner/presentations/components/list_of_bps.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -10,6 +7,8 @@ import '../../../../shared/utils/utils.dart';
 import '../../../../shared/widgets/custom_dialog.dart';
 import '../data/models/employee_position_model.dart';
 import 'bloc/empl_position_bloc.dart';
+import 'components/empl_position_form.dart';
+import 'components/list_of_positions.dart';
 
 class EmployeePositionPage extends StatefulWidget {
   const EmployeePositionPage({super.key});
@@ -34,7 +33,7 @@ class _EmployeePositionPageState extends State<EmployeePositionPage> {
                   // vehicle == null
                   //     ? PostVehicleEvent(v)
                   //     : UpdateVehicleEvent(v, vehicle.id!),
-                  PostBpEvent(v));
+                  PostEmplPositionEvent(v));
             },
           ),
         );
@@ -77,7 +76,7 @@ class _EmployeePositionPageState extends State<EmployeePositionPage> {
                 _buildCommandBar(context),
                 Constant.heightSpacer,
                 Expanded(
-                  child: ListOfBps(
+                  child: ListOfEmplPositions(
                     onSelection: (v) {
                       formDialog.call(context, v);
                     },

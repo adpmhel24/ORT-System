@@ -1,25 +1,25 @@
-part of 'bp_bloc.dart';
+part of 'empl_position_bloc.dart';
 
-abstract class BpEvent extends Equatable {
-  const BpEvent();
+abstract class EmplPositionEvent extends Equatable {
+  const EmplPositionEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class FetchAllBpEvent extends BpEvent {
+class FetchAllEmplPositionEvent extends EmplPositionEvent {
   final QueryParams? queryParams;
 
-  const FetchAllBpEvent({this.queryParams});
+  const FetchAllEmplPositionEvent({this.queryParams});
 
   @override
   List<Object?> get props => [queryParams];
 }
 
-class PostBpEvent extends BpEvent {
+class PostEmplPositionEvent extends EmplPositionEvent {
   final Map<String, dynamic> data;
 
-  const PostBpEvent(this.data);
+  const PostEmplPositionEvent(this.data);
 
   @override
   List<Object?> get props => [data];
