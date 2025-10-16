@@ -16,8 +16,14 @@ class EmplPositionBase(SQLModel):
 
 class TblEmplPosition(EmplPositionBase, table=True):
 
+    __tablename__ = "TblEmplPosition"
+
     employees: list["TblEmployee"] = Relationship(back_populates="position")
-    logNotes: list["TblLogEmplPosition"] = Relationship()
+    logNotes: list["TblLogEmplPosition"] = Relationship(back_populates="position")
+
+    class Config:
+        populate_by_name = True
+        alias_generator = None
 
 
 class LogEmplPositionBase(SQLModel):
@@ -27,6 +33,9 @@ class LogEmplPositionBase(SQLModel):
 class TblLogEmplPosition(
     BaseCreatedModel, BaseIdModel, LogEmplPositionBase, table=True
 ):
+    positionCode: str = Field(foreign_key="TblEmplPosition.code", index=True)
+    position: "TblEmplPosition" = Relationship(back_populates="logNotes")
+
     class Config:
         populate_by_name = True
         alias_generator = None

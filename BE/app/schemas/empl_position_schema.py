@@ -1,3 +1,4 @@
+from typing import List
 from ..models.empl_position_model import EmplPositionBase, LogEmplPositionBase
 from .base_schema import IdSchema, CreatedSchema, UpdatedSchema
 
@@ -10,8 +11,8 @@ class EmplPositionUpdate(EmplPositionBase):
     pass
 
 
-class EmplPositionRead(CreatedSchema, EmplPositionBase):
-    logNotes: list["LogEmplPositionRead"] = []
+class EmplPositionRead(EmplPositionBase):
+    logNotes: List["LogEmplPositionRead"] = []
 
 
 class LogEmplPositionCreate(LogEmplPositionBase):

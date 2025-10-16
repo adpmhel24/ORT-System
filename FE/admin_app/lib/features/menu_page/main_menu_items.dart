@@ -1,3 +1,4 @@
+import 'package:admin_app/features/master_data/employee_position/presentations/employee_position_page.dart';
 import 'package:admin_app/features/master_data/personnel/presentations/personnel_page.dart';
 import 'package:admin_app/features/operations/job_order/presentations/job_order_page.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -91,6 +92,18 @@ class MainMenuItems {
             onTap: () {
               if (stateRouter.matchedLocation != PersonnelPage.routePath) {
                 router.goNamed(PersonnelPage.routeName);
+              }
+            },
+          ),
+          PaneItem(
+            key: const Key(EmployeePositionPage.routePath),
+            icon: const Icon(FluentIcons.picture_position),
+            title: const Text('Employee Position'),
+            body: const SizedBox.shrink(),
+            onTap: () {
+              if (stateRouter.matchedLocation !=
+                  EmployeePositionPage.routePath) {
+                router.goNamed(EmployeePositionPage.routeName);
               }
             },
           ),

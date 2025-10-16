@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../../features/master_data/business_partner/bp_di.dart';
+import '../../features/master_data/employee_position/empl_position_di.dart';
 import '../../features/master_data/vehicle/vehicle_di.dart';
 import '../../features/operations/job_order/jo_di.dart';
 import '../constants/uri_constants.dart';
@@ -33,4 +34,5 @@ Future<void> init() async {
   await vehicleDI();
   await bpDI();
   await jobOrderDi();
+  await emplPositionDI();
 }

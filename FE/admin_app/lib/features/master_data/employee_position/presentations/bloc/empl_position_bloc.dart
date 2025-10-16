@@ -12,9 +12,10 @@ part 'empl_position_state.dart';
 
 class EmplPositionBloc extends Bloc<EmplPositionEvent, EmplPositionState> {
   final GetAllEmplPositions getAllEmplPosition;
-  final PostEmplPosition postBp;
+  final PostEmplPosition postEmplPosition;
 
-  EmplPositionBloc({required this.getAllEmplPosition, required this.postBp})
+  EmplPositionBloc(
+      {required this.getAllEmplPosition, required this.postEmplPosition})
       : super(EmployeePositionInitialState()) {
     on<FetchAllEmplPositionEvent>(_onFetchAllBp);
     on<PostEmplPositionEvent>(_onPostBp);
@@ -38,7 +39,7 @@ class EmplPositionBloc extends Bloc<EmplPositionEvent, EmplPositionState> {
       PostEmplPositionEvent event, Emitter<EmplPositionState> emit) async {
     emit(EmployeePositionLoadingState());
 
-    final result = await postBp(PostParams(body: event.data));
+    final result = await postEmplPosition(PostParams(body: event.data));
 
     emit(
       result.fold(
