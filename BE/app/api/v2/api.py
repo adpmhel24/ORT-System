@@ -22,9 +22,9 @@ api_router.include_router(
 api_router.include_router(
     business_partner.router, prefix="/masterdata/bp", tags=["Business Partner"]
 )
-api_router.include_router(
-    empl_position.router,
-    prefix="/masterdata/employee-position",
-    tags=["Business Partner"],
-)
-api_router.include_router(job_order.router, prefix="/job-order", tags=["Job Order"])
+# api_router.include_router(
+#     empl_position.router,
+#     prefix="/masterdata/employee-position",
+#     tags=["Business Partner"],
+# )
+# api_router.include_router(job_order.router, prefix="/job-order", tags=["Job Order"])
