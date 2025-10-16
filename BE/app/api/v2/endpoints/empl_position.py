@@ -30,7 +30,7 @@ async def get_empl_positions(
     keyword: str = Query(""),
     isActive: str = Query(None),
     current_user: TblUser = Depends(deps.get_current_user()),
-) -> IGetResponseBase[List[EmplPositionRead]]:
+) -> IGetResponseBase[list[EmplPositionRead]]:
     objs = await emplPosition.get_all(
         keyword=keyword,
         is_active=isActive,

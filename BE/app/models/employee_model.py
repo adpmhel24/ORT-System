@@ -17,7 +17,6 @@ class EmployeeBase(SQLModel):
     positionCode: str = Field(
         foreign_key="TblEmplPosition.code", fk_kwargs={"onupdate": "CASCADE"}
     )
-    position: "TblEmplPosition" = Relationship(back_populates="employees")
     dailyRate: float
     sss_number: str | None
     philhealth_number: str | None
@@ -32,6 +31,8 @@ class EmployeeBase(SQLModel):
 
 
 class TblEmployee(EmployeeBase, BaseIdModel, table=True):
+    position: "TblEmplPosition" = Relationship(back_populates="employees")
+
     class Config:
         populate_by_name = True
         alias_generator = None
