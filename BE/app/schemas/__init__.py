@@ -8,8 +8,8 @@ from .business_partner_schema import (
 from .empl_position_schema import (
     EmplPositionCreate,
     EmplPositionRead,
-    LogEmplPositionCreate,
-    LogEmplPositionRead,
+    # LogEmplPositionCreate,
+    # LogEmplPositionRead,
     EmplPositionUpdate,
 )
 
@@ -17,8 +17,8 @@ from .employee_schema import (
     EmployeeCreate,
     EmployeeRead,
     EmployeeUpdate,
-    LogEmployeeCreate,
-    LogEmployeeRead,
+    # LogEmployeeCreate,
+    # LogEmployeeRead,
 )
 
 from .response_schema import (

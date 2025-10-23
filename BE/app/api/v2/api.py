@@ -5,8 +5,8 @@ from .endpoints import (
     personnel,
     vehicle,
     business_partner,
-    job_order,
-    empl_position,
+    # job_order,
+    # empl_position,
     # gl_type,
 )
 

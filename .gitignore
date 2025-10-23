@@ -1,4 +1,6 @@
 OSRM/
 Tiles/
 FE/ort-system-admin/
-BE/migrations/versions/
+BE/alembic/versions/
+venv/
+ort-backend/db/data/

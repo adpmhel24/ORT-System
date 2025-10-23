@@ -1,0 +1,279 @@
+basePath: /
+definitions:
+  models.Personnel:
+    properties:
+      fullName:
+        type: string
+      isActive:
+        type: boolean
+      logs:
+        items:
+          $ref: '#/definitions/models.PersonnelLog'
+        type: array
+      role:
+        type: string
+    type: object
+  models.PersonnelLog:
+    properties:
+      User:
+        $ref: '#/definitions/models.User'
+      action:
+        description: e.g. Created, Updated, Deleted
+        type: string
+      logDate:
+        type: string
+      personnel:
+        $ref: '#/definitions/models.Personnel'
+      personnelId:
+        type: integer
+      remarks:
+        type: string
+      userId:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      email:
+        type: string
+      fullName:
+        type: string
+      is_active:
+        type: boolean
+      password:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is the ORT backend REST API built with Go and Chi.
+  title: ORT Backend API
+  version: "1.0"
+paths:
+  /api/personnel:
+    get:
+      description: Retrieve all personnel records
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Personnel'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get all personnel
+      tags:
+      - personnel
+    post:
+      consumes:
+      - application/json
+      description: Add a new personnel entry to the database
+      parameters:
+      - description: Personnel data
+        in: body
+        name: personnel
+        required: true
+        schema:
+          $ref: '#/definitions/models.Personnel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Personnel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new personnel record
+      tags:
+      - personnel
+  /api/personnel/{id}:
+    delete:
+      description: Remove a personnel record by its ID
+      parameters:
+      - description: Personnel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete personnel
+      tags:
+      - personnel
+    get:
+      description: Retrieve a single personnel record by its ID
+      parameters:
+      - description: Personnel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Personnel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get personnel by ID
+      tags:
+      - personnel
+    put:
+      consumes:
+      - application/json
+      description: Update an existing personnel record
+      parameters:
+      - description: Personnel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated personnel data
+        in: body
+        name: personnel
+        required: true
+        schema:
+          $ref: '#/definitions/models.Personnel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Personnel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update personnel
+      tags:
+      - personnel
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return a JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Log in a user
+      tags:
+      - auth
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user account
+      parameters:
+      - description: User registration
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register a new user
+      tags:
+      - auth
+schemes:
+- http
+swagger: "2.0"

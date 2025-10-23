@@ -68,7 +68,6 @@ class _EmployeePositionFormState extends State<EmployeePositionForm> {
                     entry.key: entry.value.text,
                 };
                 values['isActive'] = isActive;
-                print(values);
                 widget.onSubmit?.call(values);
               }
             },
